@@ -9,9 +9,8 @@ import br.com.lucaslememoura.service.CategoriaService;
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaController extends BaseController<CategoriaDTO, CategoriaService> {
-	
-	public CategoriaController(CategoriaService service) {
-		
-	}
 
+    public CategoriaController(CategoriaService service) {
+        super(service);
+    }
 }

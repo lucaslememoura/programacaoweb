@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.lucaslememoura.model.dto.LivroDTO;
 import br.com.lucaslememoura.model.entity.Livro;
 import br.com.lucaslememoura.model.mapper.LivroMapper;
+import br.com.lucaslememoura.repository.LivroFilterRepository;
 import br.com.lucaslememoura.repository.LivroRepository;
 import br.com.lucaslememoura.service.LivroService;
 import jakarta.persistence.EntityNotFoundException;
@@ -17,12 +18,19 @@ public class LivroServiceImpl implements LivroService {
 
     private final LivroRepository repository;
     private final LivroMapper mapper;
+    private final LivroFilterRepository filterRepository;
 
-    public LivroServiceImpl(LivroRepository repository, LivroMapper mapper) {
+    public LivroServiceImpl(LivroRepository repository, LivroMapper mapper, LivroFilterRepository filterRepository) {
         this.repository = repository;
         this.mapper = mapper;
+        this.filterRepository = filterRepository;
     }
-
+    public List<LivroDTO> filter(LivroDTO livroDTO) {
+        Livro livro = mapper.parseEntity(livroDTO);
+        List<Livro> livros = filterRepository.filter(livro);
+        return mapper.parseListDTO(livros);
+    }
+    
     @Override
     public List<LivroDTO> findAll() {
         return mapper.parseListDTO(repository.findAll());

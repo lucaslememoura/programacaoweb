@@ -5,5 +5,5 @@ import java.util.List;
 import br.com.lucaslememoura.model.dto.LivroDTO;
 
 public interface LivroService extends BaseService<LivroDTO> {
-    List<LivroDTO> filter(LivroDTO livroDTO);
+    List<LivroDTO> filtrar(LivroDTO livroDTO);
 }

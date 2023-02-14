@@ -25,9 +25,9 @@ public class LivroServiceImpl implements LivroService {
         this.mapper = mapper;
         this.filterRepository = filterRepository;
     }
-    public List<LivroDTO> filter(LivroDTO livroDTO) {
+    public List<LivroDTO> filtrar(LivroDTO livroDTO) {
         Livro livro = mapper.parseEntity(livroDTO);
-        List<Livro> livros = filterRepository.filter(livro);
+        List<Livro> livros = filterRepository.filtrar(livro);
         return mapper.parseListDTO(livros);
     }
     

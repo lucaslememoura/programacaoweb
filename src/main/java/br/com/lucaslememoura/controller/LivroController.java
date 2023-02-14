@@ -28,13 +28,15 @@ public class LivroController extends BaseController<LivroDTO, LivroService> {
 	}
 
 
+
+	
 	@PostMapping("/filtrar")
-    public ResponseEntity<List<LivroDTO>> filter(@RequestBody LivroDTO livroDTO) {
+    public ResponseEntity<List<LivroDTO>> filtrar(@RequestBody LivroDTO livroDTO) {
         try {
             return ResponseEntity
                     .status(HttpStatus.OK)
                     .contentType(MediaType.APPLICATION_JSON)
-                    .body(service.filter(livroDTO));
+                    .body(service.filtrar(livroDTO));
 
         }catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();

@@ -25,7 +25,7 @@ public class LivroFilterRepository extends QuerydslRepositorySupport {
     }
 
     @Transactional
-    public List<Livro> filter(Livro filter){
+    public List<Livro> filtrar(Livro filter){
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Livro> cq =  cb.createQuery(Livro.class);
         Root<Livro> root = cq.from(Livro.class);
@@ -38,11 +38,14 @@ public class LivroFilterRepository extends QuerydslRepositorySupport {
         if(filter.getIsbn()!=null) {
             predicates.add((Predicate) cb.like(cb.upper(root.get("isbn")), "%"+filter.getIsbn().toUpperCase()+"%" ));
         }
+        
 
         cq.where(cb.and((Predicate[]) predicates.toArray(new Predicate[predicates.size()])));
 
         List<Livro> livros = em.createQuery(cq).getResultList();
         return livros;
     }
+
+	
 
 }
